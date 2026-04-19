@@ -10,10 +10,14 @@ import messageRouter from "./src/routes/message.route.js";
 
 dotenv.config();
 const app = express();
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://chatter-w59q.vercel.app",
+];
 
 app.use(
   cors({
-    origin: "*", // later you can restrict to frontend URL
+    origin: allowedOrigins,
   }),
 );
 app.use(express.json());
@@ -27,7 +31,7 @@ const server = http.createServer(app);
 //2. Initialize Socket.IO server
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: allowedOrigins,
     methods: ["GET", "POST"],
   },
 });
