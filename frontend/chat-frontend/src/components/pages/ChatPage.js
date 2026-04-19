@@ -28,6 +28,7 @@ function ChatPage() {
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   const [showMenu, setShowMenu] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
 
   const bottomRef = useRef(null);
 
@@ -185,11 +186,22 @@ function ChatPage() {
       console.log(error);
     }
   };
+  useEffect(() => {
+    const closeSidebar = () => setShowSidebar(false);
+
+    if (showSidebar) {
+      window.addEventListener("click", closeSidebar);
+    }
+
+    return () => {
+      window.removeEventListener("click", closeSidebar);
+    };
+  }, [showSidebar]);
 
   return (
     <div className={`container ${darkMode ? "dark" : ""}`}>
       {/* Sidebar */}
-      <div className="sidebar">
+      <div className={`sidebar ${showSidebar ? "active" : ""}`}>
         <button className="group-btn" onClick={() => setShowGroupModal(true)}>
           + New Group
         </button>
@@ -204,7 +216,10 @@ function ChatPage() {
               className={`user ${
                 selectedChat?._id === chat._id ? "active" : ""
               }`}
-              onClick={() => setSelectedChat(chat)}
+              onClick={() => {
+                setSelectedChat(chat);
+                setShowSidebar(false);
+              }}
             >
               <img
                 src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
@@ -231,11 +246,23 @@ function ChatPage() {
           );
         })}
       </div>
+      {showSidebar && (
+        <div className="overlay" onClick={() => setShowSidebar(false)} />
+      )}
       {/* Chat */}
       <div className="chat">
         <div className="header">
           {/* LEFT: Chat Info */}
           <div className="header-left">
+            <button
+              className="menu-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowSidebar((prev) => !prev);
+              }}
+            >
+              {showSidebar ? "✖" : "☰"}
+            </button>
             <div className="header-name">
               {selectedChat?.isGroupChat
                 ? selectedChat.chatName
