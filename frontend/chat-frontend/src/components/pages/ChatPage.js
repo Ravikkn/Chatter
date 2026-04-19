@@ -2,8 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 import "./chat.css";
+import { BASE_URL } from "../../config.js";
 
-const socket = io("http://localhost:5000");
+const socket = io("BASE_URL");
 
 function ChatPage() {
   const [darkMode, setDarkMode] = useState(false);
@@ -33,7 +34,7 @@ function ChatPage() {
   // 🔹 Fetch Chats
   const fetchChats = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/chat", {
+      const res = await axios.get("BASE_URL/api/chat", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -46,7 +47,7 @@ function ChatPage() {
 
   const fetchAllUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/auth/users", {
+      const res = await axios.get("BASE_URL/api/auth/users", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -79,7 +80,7 @@ function ChatPage() {
     const fetchMessages = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/message/" + selectedChat._id,
+          "BASE_URL/api/message/" + selectedChat._id,
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token"),
@@ -168,7 +169,7 @@ function ChatPage() {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/message",
+        "BASE_URL/api/message",
         {
           content: newMessage,
           chatId: selectedChat._id,
@@ -287,7 +288,7 @@ function ChatPage() {
 
                           if (isAdmin) {
                             await axios.delete(
-                              `http://localhost:5000/api/chat/${selectedChat._id}`,
+                              `BASE_URL/api/chat/${selectedChat._id}`,
                               {
                                 headers: {
                                   Authorization:
@@ -297,7 +298,7 @@ function ChatPage() {
                             );
                           } else {
                             await axios.put(
-                              "http://localhost:5000/api/chat/group/leave",
+                              "BASE_URL/api/chat/group/leave",
                               { chatId: selectedChat._id },
                               {
                                 headers: {
@@ -309,7 +310,7 @@ function ChatPage() {
                           }
                         } else {
                           await axios.delete(
-                            `http://localhost:5000/api/chat/${selectedChat._id}`,
+                            `BASE_URL/api/chat/${selectedChat._id}`,
                             {
                               headers: {
                                 Authorization:
@@ -441,7 +442,7 @@ function ChatPage() {
 
                   try {
                     await axios.post(
-                      "http://localhost:5000/api/chat/group",
+                      "BASE_URL/api/chat/group",
                       {
                         name: groupName,
                         users: selectedUsers,
