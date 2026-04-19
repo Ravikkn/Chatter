@@ -96,6 +96,8 @@ body,
     padding: 10px 15px;
     background: #202c33;
     color: white;
+    position: relative;
+    z-index: 50;
 }
 
 .header-left {
@@ -105,11 +107,12 @@ body,
 }
 
 .menu-btn {
+    position: relative;
+    z-index: 10;
     position: fixed;
     /* 🔥 important */
     top: 6px;
     left: 12px;
-    z-index: 1100;
     /* above sidebar */
     background: #202c33;
     border: none;
@@ -158,7 +161,7 @@ body,
     border-radius: 6px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     overflow: hidden;
-    z-index: 100;
+    z-index: 9999;
 }
 
 .menu-item {
@@ -288,7 +291,10 @@ body,
 .sidebar {
     z-index: 1000;
 }
-
+.user-list {
+    overflow-y: auto;
+    flex: 1;
+}
 /* MOBILE */
 @media (max-width: 768px) {
     .sidebar {
@@ -297,6 +303,14 @@ body,
         top: 0;
         height: 100%;
         z-index: 1000;
+        display: flex;
+        flex-direction: column;
+    }
+    .header-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-left: 50px;
     }
 
     .sidebar.active {
@@ -307,24 +321,26 @@ body,
         width: 100%;
     }
     .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 999;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 999;
         }
-    .group-btn{
-        position: relative;
-        top:8vh;
-       
-    }
+    .group-btn {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        background: #111b21;
+        }
     .menu-btn {
-            display: block;
+        display: block;
         }
-
-             
-
+   .header {
+        padding-left: 10px;
+            
+        }
       
 }

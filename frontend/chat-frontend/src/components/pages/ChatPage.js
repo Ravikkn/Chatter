@@ -205,46 +205,52 @@ function ChatPage() {
         <button className="group-btn" onClick={() => setShowGroupModal(true)}>
           + New Group
         </button>
-        {chats.map((chat) => {
-          const otherUser = chat.users?.find(
-            (u) => u?._id?.toString() !== user?._id?.toString(),
-          );
+        <div className="user-list">
+          {chats.map((chat) => {
+            const otherUser = chat.users?.find(
+              (u) => u?._id?.toString() !== user?._id?.toString(),
+            );
 
-          return (
-            <div
-              key={chat._id}
-              className={`user ${
-                selectedChat?._id === chat._id ? "active" : ""
-              }`}
-              onClick={() => {
-                setSelectedChat(chat);
-                setShowSidebar(false);
-              }}
-            >
-              <img
-                src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
-                  chat.isGroupChat ? chat.chatName : otherUser?.name || "User",
-                )}`}
-                alt="avatar"
-                className="avatar"
-              />
+            return (
+              <div
+                key={chat._id}
+                className={`user ${
+                  selectedChat?._id === chat._id ? "active" : ""
+                }`}
+                onClick={() => {
+                  setSelectedChat(chat);
+                  setShowSidebar(false);
+                }}
+              >
+                <img
+                  src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
+                    chat.isGroupChat
+                      ? chat.chatName
+                      : otherUser?.name || "User",
+                  )}`}
+                  alt="avatar"
+                  className="avatar"
+                />
 
-              <div>
                 <div>
-                  {chat.isGroupChat ? chat.chatName : otherUser?.name || "User"}
-                </div>
+                  <div>
+                    {chat.isGroupChat
+                      ? chat.chatName
+                      : otherUser?.name || "User"}
+                  </div>
 
-                <div className="status">
-                  {chat.isGroupChat
-                    ? "Group"
-                    : onlineUsers.includes(otherUser?._id?.toString())
-                      ? "🟢 online"
-                      : "⚫ offline"}
+                  <div className="status">
+                    {chat.isGroupChat
+                      ? "Group"
+                      : onlineUsers.includes(otherUser?._id?.toString())
+                        ? "🟢 online"
+                        : "⚫ offline"}
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
       {showSidebar && (
         <div className="overlay" onClick={() => setShowSidebar(false)} />
