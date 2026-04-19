@@ -295,6 +295,30 @@ body,
     overflow-y: auto;
     flex: 1;
 }
+
+/* DESKTOP LOGOUT (BOTTOM) */
+.logout-desktop {
+    margin-top: auto;
+    /* 🔥 pushes to bottom */
+    padding: 10px;
+}
+
+.logout-desktop button {
+    width: 100%;
+    padding: 10px;
+    background: #ff4d4f;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+/* 📱 MOBILE SWITCH */
+@media (max-width: 768px) {
+ 
+}
 /* MOBILE */
 @media (max-width: 768px) {
     .sidebar {
@@ -342,5 +366,8 @@ body,
         padding-left: 10px;
             
         }
-      
+    .logout-desktop {
+              display: block;
+              /* hide bottom logout */
+        }
 }

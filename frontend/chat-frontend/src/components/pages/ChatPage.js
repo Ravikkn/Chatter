@@ -205,6 +205,7 @@ function ChatPage() {
         <button className="group-btn" onClick={() => setShowGroupModal(true)}>
           + New Group
         </button>
+
         <div className="user-list">
           {chats.map((chat) => {
             const otherUser = chat.users?.find(
@@ -250,6 +251,17 @@ function ChatPage() {
               </div>
             );
           })}
+        </div>
+        {/* 🔹 DESKTOP LOGOUT */}
+        <div className="logout-desktop">
+          <button
+            onClick={() => {
+              localStorage.clear();
+              window.location.reload();
+            }}
+          >
+            Logout
+          </button>
         </div>
       </div>
       {showSidebar && (
@@ -364,17 +376,6 @@ function ChatPage() {
                     {selectedChat?.isGroupChat
                       ? "Leave / Delete Group"
                       : "Delete Chat"}
-                  </div>
-
-                  {/* Logout */}
-                  <div
-                    className="menu-item"
-                    onClick={() => {
-                      localStorage.clear();
-                      window.location.reload();
-                    }}
-                  >
-                    Logout
                   </div>
                 </div>
               )}
