@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Socket Test</title>
+</head>
+
+<body>
+    <h2>Socket Test</h2>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script>
+        const socket = io("http://localhost:5000");
+
+        const chatId = "69e2df96db48f492be2d616f"; // your chatId
+
+        socket.on("connect", () => {
+            console.log("Connected:", socket.id);
+
+            // join chat room
+            socket.emit("join_chat", chatId);
+        });
+
+        // listen for message
+        socket.on("receive_message", (msg) => {
+            console.log("New message received:", msg);
+        });
+    </script>
+</body>
+
+</html>
