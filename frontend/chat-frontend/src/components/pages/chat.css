@@ -97,7 +97,7 @@ body,
     background: #202c33;
     color: white;
     position: relative;
-    z-index: 50;
+    z-index: 5000;
 }
 
 .header-left {
