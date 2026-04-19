@@ -3,7 +3,7 @@ import cors from "cors";
 import http from "http";
 import { Server } from "socket.io";
 import dotenv from "dotenv";
-import connectDB from "./src/config/connectDb.js";
+import connectDB from "./src/config/connectDB.js";
 import authRouter from "./src/routes/auth.route.js";
 import chatRouter from "./src/routes/chat.route.js";
 import messageRouter from "./src/routes/message.route.js";
