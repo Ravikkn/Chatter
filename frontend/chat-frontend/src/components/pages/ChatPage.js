@@ -150,7 +150,7 @@ function ChatPage() {
 
     socket.on("online_users", handler);
     return () => socket.off("online_users", handler);
-  }, []);
+  }, [user?._id]);
 
   // 🔹 Typing
   useEffect(() => {
